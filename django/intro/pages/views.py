@@ -63,8 +63,7 @@ def dtl(request):
 # 오늘이 자신의 생일이면 '예'를, 아니면 '아니오'를 보여주는 페이지
 def birthday(request):
     today = datetime.now()
-    # datetime.strptime(birthday, "%Y-%m-%d").date()
-    result = (today.month==12 and today.day==25)
+    result = (today.month==9 and today.day==25)
     
     context = {
         'today': today,
