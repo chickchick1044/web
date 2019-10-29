@@ -1,0 +1,17 @@
+<!-- send: Form Tag를 사용하여, receive로 데이터 보내기-->
+{% extends 'base.html'%}
+
+{% block body %}
+<h1>New Article</h1>
+<Form action="/articles/create/" method="POST">
+    {% csrf_token %}
+    <label for="">제목: </label>
+    <input type="text" name="title"><br>
+
+    <label for="">내용: </label>
+    <textarea name="content" id="" cols="30" rows="10"></textarea><br>
+    
+    <input type="submit">
+
+</Form>
+{% endblock %}
