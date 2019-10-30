@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1> INDEX </h1>
+<ol>{% for student in students %}
+    <li><a href="/students/{{student.id}}/">{{ student.name }}</a> </li>
+    {% endfor %}
+</ol>
+
+{% endblock %}
