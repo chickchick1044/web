@@ -3,7 +3,9 @@
 
 <h1>Edit Student</h1>
 
-<Form action="/students/{{student.pk}}/update/" method="POST">
+<!-- Form action="/students/{{student.pk}}/update/" method="POST" -->
+<!-- Form action="% url 'students:update' student.pk %" method="POST" -->
+<Form action="" method="POST">
     {% csrf_token %}
     <label for="">학생이름: </label>
     <input type="text" name="name" value="{{student.name}}"><br>

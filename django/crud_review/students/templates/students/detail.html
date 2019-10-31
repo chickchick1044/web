@@ -4,8 +4,13 @@
  <h5> 이름: {{student.name}} </h5>
  <h5> 나이: {{student.age}} </h5>
 
-<a href="/students/{{student.id}}/edit/">수정</a>
-<a href="/students/{{student.id}}/delete/">삭제</a>
-<a href="/students/">INDEX로</a>
+<a href="{% url 'students:index' %}">List</a>
+<a href="{% url 'students:edit' student.pk %}">Edit</a>
+<!-- a 태그는 POST 요청을 보낼 수 없기 때문에 form 태그를 이용해야한다 -->
+<!-- a href="{% url 'students:delete' student.pk %}">Delete</a -->
+<form action="{% url 'students:delete' student.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>
 
 {% endblock %}
