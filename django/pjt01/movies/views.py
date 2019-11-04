@@ -47,12 +47,30 @@ def detail(request, pk):
 
 def edit(request, pk):
     movie = Movie.objects.get(id=pk)
-    if request == 'POST':
-        movie = Movie.objects.get(id=pk)
-        movie.title = request.POST.get('title')
-        movie.score = request.POST.get('score')
-        movie.save()   
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        title_en = request.POST.get('title_en')
+        audience = request.POST.get('audience')
+        open_date = request.POST.get('open_date')
+        genre = request.POST.get('genre')
+        watch_grade = request.POST.get('watch_grade')
+        score = request.POST.get('score')
+        poster_url = request.POST.get('poster_url')
+        description = request.POST.get('description')
+
+        movie.title = title
+        movie.title_en = title_en
+        movie.audience = audience
+        movie.open_date = open_date
+        movie.genre = genre
+        movie.watch_grade = watch_grade
+        movie.score = score
+        movie.poster_url = poster_url
+        movie.description = description
+        movie.save()
+
         return redirect('movies:detail', movie.pk)
+        
     else:
         context = {
             'movie': movie,

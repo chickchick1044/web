@@ -2,27 +2,27 @@
 {% block body %}
 <h1>Edit</h1>
 <form action="" method="POST">
-    {% csrf_token %}
+        {% csrf_token %}
     <table>
         <tr>
-            <td><label for="">영화명:</label></td>>
-            <td><input type="text" name="title" value="{{movie.title}} "></td>
+            <td><label for="">영화명:</label></td>
+            <td><input type="text" name="title" value="{{movie.title}}"></td>
         </tr>
         <tr>
             <td><label for="">영화명(영문):</label></td>
-            <td><input type="text" name="title_en" value="{{movie.title_en}} "></td>
+            <td><input type="text" name="title_en" value="{{movie.title_en}}" ></td>
         </tr>
         <tr>
             <td><label for="">누적 관객수:</label></td>
-            <td><input type="number" name="audience" value="{{movie.audience}} "></td>
+            <td><input type="number" name="audience" value="{{movie.audience}}"></td>
         </tr>
         <tr>
             <td><label for="">개봉일:</label></td>
-            <td><input type="date" name="open_date" value="{{movie.open_date}} "></td>
+            <td><input type="date" name="open_date" value="{{ movie.open_date|date:'Y-m-d'}}"></td>
         </tr>
         <tr>
             <td><label for="">장르:</label></td>
-            <td><input type="text" name="genre" value="{{movie.genre}} "> </td>
+            <td><input type="text" name="genre" value="{{movie.genre}}"> </td>
         </tr>
         <tr>
             <td><label for="">관람등급</label></td>
@@ -30,15 +30,15 @@
         </tr>
         <tr>
             <td><label for="">평점:</label></td>
-            <td><input type="number" name="score" step="0.01" min="0" max="10" value="{{movie.score}} "></td>
+            <td><input type="number" name="score" step="0.01" min="0" max="10" value="{{movie.score}}" ></td>
         </tr>
         <tr>
             <td><label for="">포스터 이미지:</label></td>
-            <td><input type="text" name="poster_url" value="{{movie.poster_url}} "></td>
+            <td><input type="text" name="poster_url" value="{{ movie.poster_url }}"></td>
         </tr>
         <tr>
             <td><label for="">영화소개</label></td>
-            <td><textarea name="description" cols="30" rows="10" value="{{movie.description}} "></textarea></td>
+            <td><textarea name="description" cols="30" rows="10">{{ movie.description }}</textarea></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit"></td>

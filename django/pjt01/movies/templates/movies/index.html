@@ -5,7 +5,7 @@
 
 {% for movie in movies %}
 <ul>
-    <li><a href="{% url 'movies:detail' movie.pk %}">{{movie.title}}</a> </li>
+    <li><a href="{% url 'movies:detail' movie.pk %}">{{movie.title}}</a> 평점:{{ movie.score }} </li>
 </ul>
 {% endfor %}
 <a href="{% url 'movies:new' %}">추가</a>
