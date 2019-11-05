@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Student
+from .models import Student, Comment
 
 # Create your views here.
 def index(request):
@@ -29,9 +29,16 @@ def new(request):
 #     return redirect('students:detail', student.pk)
 
 def detail(request, pk):
+    # 1. pk에 해당하는 student를 db에서 가져오기
     student = Student.objects.get(id=pk)
+    # 1-1. student의 comment를 다 가져오기
+    comments = student.comment_set.all()
+    # 1-2. student의 comment 개수 
+    # comments.count
+
     context = {
         'student': student,
+        'comments': comments,
     }
     return render(request, 'students/detail.html', context)
 
@@ -61,7 +68,6 @@ def edit(request, pk):
         return render(request, 'students/edit.html', context)
 
 
-
 # def update(request, pk):
 #     student = Student.objects.get(id=pk)
 #     name = request.POST.get('name')
@@ -73,4 +79,38 @@ def edit(request, pk):
 #     # return redirect(f'/students/{student.pk}/')
 #     return redirect('students:detail', student.pk)
 
+def comments_new(request, student_pk):
+    # 1. request에서 데이터 가져오기
+    content = request.POST.get('content')
+    # 2. Comment 생성
+    comment = Comment()
+    comment.content = content
+    comment.student_id = student_pk
+    comment.save()
+    # 3. student 상세 페이지로 redirect
+    return redirect('students:detail', student_pk)
 
+# POST 요청을 받음
+def comments_delete(request, student_pk, pk):
+    comment = Comment.objects.get(pk=pk)
+    comment.delete()
+    return redirect('students:detail', student_pk)
+
+def comments_edit(request, student_pk, pk):
+    comment = Comment.objects.get(pk=pk)
+    if request.method == 'POST':
+        # POST
+        # 1. POST로 넘어온 데이터 가져오기
+        content = request.POST.get('content')
+        # 2. comment에 바꿔 넣기 & 저장
+        comment.content = content
+        comment.save()
+        # 3. 댓글목록 페이지로 redirect
+        return redirect('students:detail', student_pk)
+
+    else:
+        # GET
+        context = {
+            'comment': comment,
+        }
+        return render(request, 'students/comments_edit.html', context)

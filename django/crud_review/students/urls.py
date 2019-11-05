@@ -11,6 +11,9 @@ urlpatterns = [
     path('<int:pk>/edit/', views.edit, name='edit'), # GET, POST /student/1/edit
     # path('<int:pk>/update/', views.update, name='update'), # POST /students/1/update(X)
     path('<int:pk>/delete/', views.delete, name='delete'), # POST /students/1/delete => Restful하진 않지만, 장고는 delete를 지원하지 않음
+    path('<int:student_pk>/comments/new/', views.comments_new, name='comments_new'),
+    path('<int:student_pk>/comments/<int:pk>/delete', views.comments_delete, name='comments_delete'), # POST /students/1/comments/1/delete
+    path('<int:student_pk>/comments/<int:pk>/edit', views.comments_edit, name='comments_edit'),
 
 ]
 
